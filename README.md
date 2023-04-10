@@ -25,3 +25,7 @@ conda install -c conda-forge ffmpeg
 
 pip install basic-pitch --upgrade
 
+# project structure
+/data -> datasets
+/models -> trained models
+
