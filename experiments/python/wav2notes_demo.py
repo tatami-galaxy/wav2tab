@@ -9,6 +9,7 @@ from typing import Dict, Tuple, Optional, IO
 from os.path import dirname, abspath
 from basic_pitch.inference import predict
 from basic_pitch import ICASSP_2022_MODEL_PATH
+import numpy as np
 
 # get root directory
 #root = abspath(__file__)
@@ -106,9 +107,24 @@ if __name__ == '__main__':
     # separate into stems
     #separate(args.in_path, args.out_path)
 
-    model_output, midi_data, note_events = predict("/users/ujan/wav2tab/experiments/python/htdemucs/thunderstruck/other.mp3")
+    # midi : pretty_midi.PrettyMIDI object
+    # note_events: A list of note event tuples (start_time_s, end_time_s, pitch_midi, amplitude, bends)
+    model_output, midi_data, note_events = predict("/root/wav2tab/experiments/python/htdemucs/thunderstruck/other.mp3")
 
-    print(midi_data)
+    start_times = []
+    end_times = []
+    pitches = []
+    for event in note_events:
+        start_times.append(event[0])
+        end_times.append(event[1])
+        pitches.append(event[2])
 
+    start_times_ids = np.argsort(start_times)
+    sorted_pitches = np.array(pitches)[start_times_ids]
+    print(sorted_pitches)
+
+    start_times = sorted(start_times)
+    end_times = sorted(end_times)
     
+
 

@@ -20,9 +20,10 @@ sudo apt-get install soundstretch  # ubuntu <br />
 conda uninstall ffmpeg <br />
 conda install -c conda-forge ffmpeg<br />
 
-# basic pitch installation #
+# Basic Pitch installation #
 # from https://github.com/spotify/basic-pitch
 
 pip install basic-pitch --upgrade
 
-python dir_setup.py
+# run this to setup directory structure in current repo
+python repo_setup.py
