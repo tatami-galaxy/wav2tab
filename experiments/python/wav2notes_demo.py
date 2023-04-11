@@ -129,14 +129,14 @@ if __name__ == '__main__':
     # parse and check cli arguments #
     args = argp.parse_args() 
 
-    # separate into stems -> others.wav has guitar for now
-    #separate(args.in_path, args.out_path)
+    # separate into stems -> other.mp3 has guitar for now
+    separate(args.in_path, args.out_path)
 
     # midi : pretty_midi.PrettyMIDI object
     # note_events: A list of note event tuples (start_time_s, end_time_s, pitch_midi, amplitude, bends)
     outfile_path = args.out_path + 'htdemucs/' + args.in_path.split('/')[-1].split('.mp3')[0] + '/other.mp3'
 
-    model_output, midi_data, note_events = predict("/root/wav2tab/experiments/python/htdemucs/thunderstruck/other.mp3")
+    model_output, midi_data, note_events = predict(outfile_path)
 
     start_times = []
     end_times = []
