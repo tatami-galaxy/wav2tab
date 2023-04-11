@@ -93,14 +93,35 @@ def separate_dir(inp=None, outp=None):
 
 
 def separate(inp=None, outp=None):
-    pass
+    inp = inp 
+    outp = outp 
+    cmd = ["demucs", "-o", str(outp)]
+    if mp3:
+        cmd += ["--mp3", f"--mp3-bitrate={mp3_rate}"]
+    if float32:
+        cmd += ["--float32"]
+    if int24:
+        cmd += ["--int24"]
+    if two_stems is not None:
+        cmd += [f"--two-stems={two_stems}"]
+
+    print("Going to separate file:")
+    print(inp)
+    print("With command: ", " ".join(cmd))
+    p = sp.Popen(cmd + [inp], stdout=sp.PIPE, stderr=sp.PIPE)
+
+    copy_process_streams(p)
+    p.wait()
+    if p.returncode != 0:
+        print("Command failed, something went wrong.")
 
 
 if __name__ == '__main__':
 
     argp = ArgumentParser()
 
-    # song input
+    # song input -> mp3 file (for now)
+    # make sure file has space in name (for now)
     argp.add_argument('--in_path', type=str, default=None)
     # stems output
     argp.add_argument('--out_path', type=str, default='./')
@@ -108,12 +129,13 @@ if __name__ == '__main__':
     # parse and check cli arguments #
     args = argp.parse_args() 
 
-    # separate into stems
-    separate(args.in_path, args.out_path)
-
+    # separate into stems -> others.wav has guitar for now
+    #separate(args.in_path, args.out_path)
 
     # midi : pretty_midi.PrettyMIDI object
     # note_events: A list of note event tuples (start_time_s, end_time_s, pitch_midi, amplitude, bends)
+    outfile_path = args.out_path + 'htdemucs/' + args.in_path.split('/')[-1].split('.mp3')[0] + '/other.mp3'
+
     model_output, midi_data, note_events = predict("/root/wav2tab/experiments/python/htdemucs/thunderstruck/other.mp3")
 
     start_times = []
