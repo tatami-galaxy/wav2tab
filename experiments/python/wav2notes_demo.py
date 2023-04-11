@@ -65,8 +65,8 @@ def copy_process_streams(process: sp.Popen):
             std.write(buf)
             std.flush()
 
-
-def separate(inp=None, outp=None):
+# separate all song in directory passed in
+def separate_dir(inp=None, outp=None):
     inp = inp 
     outp = outp 
     cmd = ["python3", "-m", "demucs.separate", "-o", str(outp), "-n", model]
@@ -90,6 +90,10 @@ def separate(inp=None, outp=None):
     p.wait()
     if p.returncode != 0:
         print("Command failed, something went wrong.")
+
+
+def separate(inp=None, outp=None):
+    pass
 
 
 if __name__ == '__main__':
