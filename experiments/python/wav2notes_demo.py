@@ -105,7 +105,8 @@ if __name__ == '__main__':
     args = argp.parse_args() 
 
     # separate into stems
-    #separate(args.in_path, args.out_path)
+    separate(args.in_path, args.out_path)
+
 
     # midi : pretty_midi.PrettyMIDI object
     # note_events: A list of note event tuples (start_time_s, end_time_s, pitch_midi, amplitude, bends)
