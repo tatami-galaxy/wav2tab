@@ -10,6 +10,7 @@ from os.path import dirname, abspath
 from basic_pitch.inference import predict
 from basic_pitch import ICASSP_2022_MODEL_PATH
 import numpy as np
+import librosa
 
 # get root directory
 #root = abspath(__file__)
@@ -116,6 +117,16 @@ def separate(inp=None, outp=None):
         print("Command failed, something went wrong.")
 
 
+def pitch_to_note(note_events):
+    ret_list = []
+    for event in note_events:
+        l = list(event)
+        note = librosa.midi_to_note(event[2], unicode=False)  # event[2] is pitch
+        l[2] = note
+        ret_list.append(l)
+    return ret_list
+
+
 if __name__ == '__main__':
 
     argp = ArgumentParser()
@@ -138,20 +149,12 @@ if __name__ == '__main__':
 
     model_output, midi_data, note_events = predict(outfile_path)
 
-    start_times = []
-    end_times = []
-    pitches = []
-    for event in note_events:
-        start_times.append(event[0])
-        end_times.append(event[1])
-        pitches.append(event[2])
+    # sort note events according to start time 
+    sorted_events = sorted(note_events, key=lambda x: x[0])  # x[0] is start time
 
-    start_times_ids = np.argsort(start_times)
-    sorted_pitches = np.array(pitches)[start_times_ids]
-    print(sorted_pitches)
-
-    start_times = sorted(start_times)
-    end_times = sorted(end_times)
+    # midi pitch to note
+    # each event is now a list (previously tuple)
+    music_note_events = pitch_to_note(sorted_events)
     
 
 
