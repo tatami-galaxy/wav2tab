@@ -155,6 +155,8 @@ if __name__ == '__main__':
     # midi pitch to note
     # each event is now a list (previously tuple)
     music_note_events = pitch_to_note(sorted_events)
+
+    ## fix guitar constants ##
     
 
 
