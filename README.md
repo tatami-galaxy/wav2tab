@@ -18,7 +18,10 @@ pip install -e . <br />
 brew install sound-touch  # mac <br />
 sudo apt-get install soundstretch  # ubuntu <br />
 
-### for ffmpeg error 
+### ffmpeg
+sudo apt install ffmpeg
+
+### for conda ffmpeg error 
 conda uninstall ffmpeg <br />
 conda install -c conda-forge ffmpeg<br />
 
@@ -32,4 +35,4 @@ python repo_setup.py
 
 ## requirements
 ### make sure env is activated
-pip install -r requirements
+pip install -r requirements.txt
