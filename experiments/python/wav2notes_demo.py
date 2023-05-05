@@ -132,7 +132,7 @@ if __name__ == '__main__':
     argp = ArgumentParser()
 
     # song input -> mp3 file (for now)
-    # make sure file has space in name (for now)
+    # make sure file has no space in name (for now)
     argp.add_argument('--in_path', type=str, default=None)
     # stems output
     argp.add_argument('--out_path', type=str, default='./')
@@ -155,6 +155,8 @@ if __name__ == '__main__':
     # midi pitch to note
     # each event is now a list (previously tuple)
     music_note_events = pitch_to_note(sorted_events)
+
+    print(music_note_events[0])
 
     ## fix guitar constants ##
     

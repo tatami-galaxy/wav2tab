@@ -30,5 +30,6 @@ pip install basic-pitch --upgrade
 ### run this to setup directory structure in wav2tab repo
 python repo_setup.py
 
-## librosa
-pip install librosa
+## requirements
+### make sure env is activated
+pip install -r requirements
