@@ -153,7 +153,7 @@ if __name__ == '__main__':
     sorted_events = sorted(note_events, key=lambda x: x[0])  # x[0] is start time
 
     # midi pitch to note
-    # each event is now a list (previously tuple)
+    # each event is now a list [start_time_s, end_time_s, pitch_midi, amplitude, bends]
     music_note_events = pitch_to_note(sorted_events)
 
     print(music_note_events[0])
