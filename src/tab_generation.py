@@ -65,7 +65,8 @@ class GuitarCMD:
 
 
     def generate(self, note_events):
-        for i in range(self.tab_length):
+        end_space = 5
+        for i in range(self.tab_length + end_space):
             note = note_events[i][2]  # (start_time_s, end_time_s, pitch_midi, amplitude, bends)
             if note not in fretboard: continue
             for string, fret in fretboard[note].items():
