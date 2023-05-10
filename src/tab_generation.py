@@ -43,18 +43,19 @@ class GuitarCMD:
     def __init__(self) -> None:
 
         self.strings = []
-        self.tab_length = 100
+        self.string_length = 100
+        self.tab_length = 50
         self.make_strings()
 
 
     def make_strings(self):
 
-        E1 = 'E'+'-'*self.tab_length
-        B = 'B'+'-'*self.tab_length
-        G = 'G'+'-'*self.tab_length
-        D = 'D'+'-'*self.tab_length
-        A = 'A'+'-'*self.tab_length
-        E2 = 'E'+'-'*self.tab_length
+        E1 = 'E'+'-'*self.string_length
+        B = 'B'+'-'*self.string_length
+        G = 'G'+'-'*self.string_length
+        D = 'D'+'-'*self.string_length
+        A = 'A'+'-'*self.string_length
+        E2 = 'E'+'-'*self.string_length
 
         self.strings.append(E1)
         self.strings.append(B)
@@ -65,16 +66,17 @@ class GuitarCMD:
 
 
     def generate(self, note_events):
-        end_space = 5
-        for i in range(self.tab_length + end_space):
+        gap = 0
+        for i in range(self.tab_length):
             note = note_events[i][2]  # (start_time_s, end_time_s, pitch_midi, amplitude, bends)
             if note not in fretboard: continue
             for string, fret in fretboard[note].items():
                 if fret != -1:
                     new_string = list(self.strings[string-1])
-                    new_string[i+2] = str(fret)
+                    new_string[i+2+gap] = str(fret)
                     self.strings[string-1] = ''.join(new_string)
                     break
+            gap += 1
 
         # print tab to cmd
         for string in self.strings:
