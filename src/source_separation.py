@@ -9,6 +9,7 @@ from typing import Dict, Tuple, Optional, IO
 class DemucsLib:
 
     def __init__(self) -> None:
+        self.model = "htdemucs"
         self.mp3 = True
         self.mp3_rate = 320
         self.float32 = False
