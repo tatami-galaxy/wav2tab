@@ -1,6 +1,7 @@
 from basic_pitch.inference import predict
 import librosa
 
+# outputs overtones
 
 class BasicPitchLib:
 

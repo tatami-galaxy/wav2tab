@@ -38,6 +38,12 @@ fretboard ={
     'G#2': {1: -1, 2: -1, 3: -1, 4: -1, 5: -1, 6: 4},
 }
 
+# prints notes sorted by start time to terminal
+# ignores out of fretboard notes
+# selects first valid note from fretboard
+# does not consider note position
+
+
 class GuitarCMD:
 
     def __init__(self) -> None:
