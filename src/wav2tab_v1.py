@@ -15,7 +15,6 @@ from source_separation import DemucsLib
 from pitch_detection import BasicPitchLib
 from tab_generation import GuitarCMD
 
-
 if __name__ == '__main__':
 
     argp = ArgumentParser()
